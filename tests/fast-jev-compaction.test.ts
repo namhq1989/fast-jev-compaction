@@ -394,10 +394,10 @@ describe('HTTP client', () => {
     const request = buildJevRequest({ apiKey: 'k' }, { a: 1 }, {
       q: { type: 'noul', instructions: 'x' },
     });
-    expect(request.url).toBe('https://api.typesafe.ai/v1/systemone');
+    expect(request.url).toBe('https://openrouter.ai/api/alpha/decisions');
     expect(request.headers.authorization).toBe('Bearer k');
     expect(JSON.parse(request.body)).toEqual({
-      model: 'jev-latest',
+      model: '~typesafe/jev-latest',
       state: { a: 1 },
       questions: { q: { type: 'noul', instructions: 'x' } },
     });
@@ -425,9 +425,9 @@ describe('HTTP client', () => {
     expect(JSON.parse(bodies[0]!).model).toBe('jev-test');
 
     const keyless = new JevClient({ apiKey: '' });
-    await expect(keyless.ask('s', {})).rejects.toThrow(/TYPESAFE_API_KEY/);
+    await expect(keyless.ask('s', {})).rejects.toThrow(/OPENROUTER_API_KEY/);
     await expect(
       compactMessages(transcript(), { apiKey: '', preserveRecentMessages: 1 }),
-    ).rejects.toThrow(/TYPESAFE_API_KEY/);
+    ).rejects.toThrow(/OPENROUTER_API_KEY/);
   });
 });
