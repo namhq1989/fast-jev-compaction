@@ -30,9 +30,9 @@ Touched files (kept deliberately small so upstream merges stay clean):
 
 ```sh
 git fetch upstream
-git rebase upstream/main        # on the `openrouter` branch
+git rebase upstream/main
 npm run typecheck && npm test
-git push --force-with-lease origin openrouter
+git push --force-with-lease origin main
 ```
 
 Conflicts should be limited to the lines in the table above. If upstream adds
@@ -48,3 +48,15 @@ configure it instead.
   id (`jev-latest`) sent to OpenRouter will fail — keep the `~typesafe/` prefix.
 - Jev's context window is 32k on both backends, so the default
   `maxRequestTokens` of 30000 still applies.
+
+## Marketplace name
+
+The marketplace in `.claude-plugin/marketplace.json` is renamed to
+**`fast-jev-openrouter`** so it does not collide with upstream's
+`fast-jev-compaction` marketplace. Installing upstream's id
+(`fast-jev-compaction@fast-jev-compaction`) would silently pull TypeSafe code
+even with this fork added. The id for this fork is:
+
+```
+fast-jev-compaction@fast-jev-openrouter
+```
